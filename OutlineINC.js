@@ -59,8 +59,6 @@ function Initial() {
 function GetContent() {
 	// Ê∑ªÂä†ÁõÆÂΩïÂΩ¢Âºè„ÄêKMContentClass=1~5„ÄëÁöÑÂ§ßÁ∫≤
 	listContent = [];
-<<<<<<< HEAD
-=======
 	var objAs = objHtmlDocument.getElementsByTagName("A");
 	for (var i = 0; i < objAs.length; i++) {
 		var elem = objAs[i];
@@ -116,7 +114,6 @@ function GetContent() {
 function GetBookmark() {
 	// Ê∑ªÂä†‰π¶Á≠æÂΩ¢Âºè„Äê<a name="bookmarkname">„ÄëÁöÑÂ§ßÁ∫≤
 	listBookmark = [];
->>>>>>> devmaster
 	var objAs = objHtmlDocument.getElementsByTagName("A");
 	for (var i = 0; i < objAs.length; i++) {
 		var elem = objAs[i];
@@ -125,92 +122,6 @@ function GetBookmark() {
 		var iClass = parseInt(elem.KMContentClass);
 		var isHide = elem.KMContentHide;
 		if  ((!isHide || isHide != "1") && !iClass && id!="KMContentPageTopID" && name != null && name != "") { 
-			listBookmark.push(elem); 
-		}
-	}
-}
-//
-function GetContent() {
-	// ÃÌº”ƒø¬º–Œ Ω°æKMContentClass=1~5°øµƒ¥Û∏Ÿ
-	listContent = [];
-	var objAs = objHtmlDocument.getElementsByTagName("A");
-	for (var i = 0; i < objAs.length; i++) {
-		var elem = objAs[i];
-		var id = elem.id;
-		var iClass = parseInt(elem.KMContentClass);
-		var name = elem.name;
-		if (iClass) { listContent.push(elem); }
-	}
-	// H1~H6
-	for (var k = 1; k <= 6; k++){
-		var objH16 = objHtmlDocument.getElementsByTagName("H"+k);
-		for (var i = 0; i < objH16.length; i++) {
-			var elem = objH16[i];
-			var text = elem.innerText;
-			var iClass = parseInt(elem.KMContentClass);
-			if (iClass && text != null && text != "") { 
-				listContent.push(elem); 
-			}
-		}
-	}
-	// Wiki
-	var objWiki = objHtmlDocument.getElementsByTagName("DIV");
-	for (var i = 0; i < objWiki.length; i++) {
-		var elem = objWiki[i];
-		var text = elem.innerText;
-		var iClass = parseInt(elem.KMContentClass);
-		if  (iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
-			listContent.push(elem); 
-		}
-	}
-	// Bold
-	var objBold = objHtmlDocument.getElementsByTagName("B");
-	for (var i = 0; i < objBold.length; i++) {
-		var elem = objBold[i];
-		var text = elem.innerText;
-		var iClass = parseInt(elem.KMContentClass);
-		if  (iClass && text != null && text != "") { 
-			listContent.push(elem); 
-		}
-	}
-	// Strong
-	var objStrongs = objHtmlDocument.getElementsByTagName("STRONG");
-	for (var i = 0; i < objStrongs.length; i++) {
-		var elem = objStrongs[i];
-		var text = elem.innerText;
-		var iClass = parseInt(elem.KMContentClass);
-		if  (iClass && text != null && text != "") { 
-			listContent.push(elem); 
-		}
-	}
-<<<<<<< HEAD
-}
-//
-function GetBookmark() {
-	// Ê∑ªÂä†‰π¶Á≠æÂΩ¢Âºè„Äê<a name="bookmarkname">„ÄëÁöÑÂ§ßÁ∫≤
-=======
-	alert("124");
-	alert(listContent.length);
-}
-//
-function GetBookmark() {
-	// ÃÌº” È«©–Œ Ω°æ<a name="bookmarkname">°øµƒ¥Û∏Ÿ
->>>>>>> devmaster
-	listBookmark = [];
-	var objAs = objHtmlDocument.getElementsByTagName("A");
-	for (var i = 0; i < objAs.length; i++) {
-		var elem = objAs[i];
-		var id = elem.id;
-<<<<<<< HEAD
-		var name = elem.name;
-		var iClass = parseInt(elem.KMContentClass);
-		var isHide = elem.KMContentHide;
-		if  ((!isHide || isHide != "1") && !iClass && id!="KMContentPageTopID" && name != null && name != "") { 
-=======
-		var iClass = parseInt(elem.KMContentClass);
-		var name = elem.name;
-		if (!iClass && id!="KMContentPageTopID" && name != null && name != "") { 
->>>>>>> devmaster
 			listBookmark.push(elem); 
 		}
 	}
@@ -225,17 +136,8 @@ function GetH16(){
 			var elem = objH16[i];
 			var text = elem.innerText;
 			var iClass = parseInt(elem.KMContentClass);
-<<<<<<< HEAD
 			var isHide = elem.KMContentHide;
 			if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
-=======
-<<<<<<< HEAD
-			if  (!iClass && text != null && text != "") { 
-=======
-			var isHide = elem.KMContentHide;
-			if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
->>>>>>> master
->>>>>>> devmaster
 				listH16.push(elem);
 			}
 		}
@@ -251,17 +153,8 @@ function GetWiki(){
 		var elem = objWiki[i];
 		var text = elem.innerText;
 		var iClass = parseInt(elem.KMContentClass);
-<<<<<<< HEAD
 		var isHide = elem.KMContentHide;
 		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
-=======
-<<<<<<< HEAD
-		if  (!iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
-=======
-		var isHide = elem.KMContentHide;
-		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
->>>>>>> master
->>>>>>> devmaster
 			listWiki.push(elem); 
 		}
 	}
@@ -275,40 +168,20 @@ function GetBold(){
 		var elem = objBold[i];
 		var text = elem.innerText;
 		var iClass = parseInt(elem.KMContentClass);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-		if  (!iClass && text != null && text != "") { listBold.push(elem); }
-=======
->>>>>>> devmaster
 		var isHide = elem.KMContentHide;
 		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
 			listBold.push(elem); 
 		}
-<<<<<<< HEAD
-=======
->>>>>>> master
->>>>>>> devmaster
 	}
 	var objStrongs = objHtmlDocument.getElementsByTagName("STRONG");
 	for (var i = 0; i < objStrongs.length; i++) {
 		var elem = objStrongs[i];
 		var text = elem.innerText;
 		var iClass = parseInt(elem.KMContentClass);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-		if  (!iClass && text != null && text != "") { listBold.push(elem); }
-=======
->>>>>>> devmaster
 		var isHide = elem.KMContentHide;
 		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
 			listBold.push(elem); 
 		}
-<<<<<<< HEAD
-=======
->>>>>>> master
->>>>>>> devmaster
 	}
 }
 ////
