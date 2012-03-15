@@ -34,7 +34,7 @@ var listH16 = [];
 var listBold = [];
 ////
 ////==========================================================================================================================
-////Ìí¼Ó´ó¸Ù
+////æ·»åŠ å¤§çº²
 Initial();
 //
 function Initial() {
@@ -55,66 +55,265 @@ function Initial() {
 ////
 ////==========================================================================================================================
 ////
-function GetAs() {
+//
+function GetContent() {
+	// æ·»åŠ ç›®å½•å½¢å¼ã€KMContentClass=1~5ã€‘çš„å¤§çº²
 	listContent = [];
-	listBookmark = [];
+<<<<<<< HEAD
+=======
 	var objAs = objHtmlDocument.getElementsByTagName("A");
 	for (var i = 0; i < objAs.length; i++) {
 		var elem = objAs[i];
 		var id = elem.id;
 		var iClass = parseInt(elem.KMContentClass);
 		var name = elem.name;
-		// Ìí¼ÓÄ¿Â¼ĞÎÊ½¡¾KMContentClass=1~5¡¿µÄ´ó¸Ù
 		if (iClass) { listContent.push(elem); }
-		// Ìí¼ÓÊéÇ©ĞÎÊ½¡¾<a name="bookmarkname">¡¿µÄ´ó¸Ù
-		else if (id!="KMContentPageTopID" && name != null && name != "") { listBookmark.push(elem); }
+	}
+	// H1~H6
+	for (var k = 1; k <= 6; k++){
+		var objH16 = objHtmlDocument.getElementsByTagName("H"+k);
+		for (var i = 0; i < objH16.length; i++) {
+			var elem = objH16[i];
+			var text = elem.innerText;
+			var iClass = parseInt(elem.KMContentClass);
+			if (iClass && text != null && text != "") { 
+				listContent.push(elem); 
+			}
+		}
+	}
+	// Wiki
+	var objWiki = objHtmlDocument.getElementsByTagName("DIV");
+	for (var i = 0; i < objWiki.length; i++) {
+		var elem = objWiki[i];
+		var text = elem.innerText;
+		var iClass = parseInt(elem.KMContentClass);
+		if  (iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
+			listContent.push(elem); 
+		}
+	}
+	// Bold
+	var objBold = objHtmlDocument.getElementsByTagName("B");
+	for (var i = 0; i < objBold.length; i++) {
+		var elem = objBold[i];
+		var text = elem.innerText;
+		var iClass = parseInt(elem.KMContentClass);
+		if  (iClass && text != null && text != "") { 
+			listContent.push(elem); 
+		}
+	}
+	// Strong
+	var objStrongs = objHtmlDocument.getElementsByTagName("STRONG");
+	for (var i = 0; i < objStrongs.length; i++) {
+		var elem = objStrongs[i];
+		var text = elem.innerText;
+		var iClass = parseInt(elem.KMContentClass);
+		if  (iClass && text != null && text != "") { 
+			listContent.push(elem); 
+		}
+	}
+}
+//
+function GetBookmark() {
+	// æ·»åŠ ä¹¦ç­¾å½¢å¼ã€<a name="bookmarkname">ã€‘çš„å¤§çº²
+	listBookmark = [];
+>>>>>>> devmaster
+	var objAs = objHtmlDocument.getElementsByTagName("A");
+	for (var i = 0; i < objAs.length; i++) {
+		var elem = objAs[i];
+		var id = elem.id;
+		var name = elem.name;
+		var iClass = parseInt(elem.KMContentClass);
+		var isHide = elem.KMContentHide;
+		if  ((!isHide || isHide != "1") && !iClass && id!="KMContentPageTopID" && name != null && name != "") { 
+			listBookmark.push(elem); 
+		}
+	}
+}
+//
+function GetContent() {
+	// Ìí¼ÓÄ¿Â¼ĞÎÊ½¡¾KMContentClass=1~5¡¿µÄ´ó¸Ù
+	listContent = [];
+	var objAs = objHtmlDocument.getElementsByTagName("A");
+	for (var i = 0; i < objAs.length; i++) {
+		var elem = objAs[i];
+		var id = elem.id;
+		var iClass = parseInt(elem.KMContentClass);
+		var name = elem.name;
+		if (iClass) { listContent.push(elem); }
+	}
+	// H1~H6
+	for (var k = 1; k <= 6; k++){
+		var objH16 = objHtmlDocument.getElementsByTagName("H"+k);
+		for (var i = 0; i < objH16.length; i++) {
+			var elem = objH16[i];
+			var text = elem.innerText;
+			var iClass = parseInt(elem.KMContentClass);
+			if (iClass && text != null && text != "") { 
+				listContent.push(elem); 
+			}
+		}
+	}
+	// Wiki
+	var objWiki = objHtmlDocument.getElementsByTagName("DIV");
+	for (var i = 0; i < objWiki.length; i++) {
+		var elem = objWiki[i];
+		var text = elem.innerText;
+		var iClass = parseInt(elem.KMContentClass);
+		if  (iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
+			listContent.push(elem); 
+		}
+	}
+	// Bold
+	var objBold = objHtmlDocument.getElementsByTagName("B");
+	for (var i = 0; i < objBold.length; i++) {
+		var elem = objBold[i];
+		var text = elem.innerText;
+		var iClass = parseInt(elem.KMContentClass);
+		if  (iClass && text != null && text != "") { 
+			listContent.push(elem); 
+		}
+	}
+	// Strong
+	var objStrongs = objHtmlDocument.getElementsByTagName("STRONG");
+	for (var i = 0; i < objStrongs.length; i++) {
+		var elem = objStrongs[i];
+		var text = elem.innerText;
+		var iClass = parseInt(elem.KMContentClass);
+		if  (iClass && text != null && text != "") { 
+			listContent.push(elem); 
+		}
+	}
+<<<<<<< HEAD
+}
+//
+function GetBookmark() {
+	// æ·»åŠ ä¹¦ç­¾å½¢å¼ã€<a name="bookmarkname">ã€‘çš„å¤§çº²
+=======
+	alert("124");
+	alert(listContent.length);
+}
+//
+function GetBookmark() {
+	// Ìí¼ÓÊéÇ©ĞÎÊ½¡¾<a name="bookmarkname">¡¿µÄ´ó¸Ù
+>>>>>>> devmaster
+	listBookmark = [];
+	var objAs = objHtmlDocument.getElementsByTagName("A");
+	for (var i = 0; i < objAs.length; i++) {
+		var elem = objAs[i];
+		var id = elem.id;
+<<<<<<< HEAD
+		var name = elem.name;
+		var iClass = parseInt(elem.KMContentClass);
+		var isHide = elem.KMContentHide;
+		if  ((!isHide || isHide != "1") && !iClass && id!="KMContentPageTopID" && name != null && name != "") { 
+=======
+		var iClass = parseInt(elem.KMContentClass);
+		var name = elem.name;
+		if (!iClass && id!="KMContentPageTopID" && name != null && name != "") { 
+>>>>>>> devmaster
+			listBookmark.push(elem); 
+		}
 	}
 }
 //
 function GetH16(){
-	// Ìí¼Ó±êÌâÑùÊ½¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿µÄ´ó¸Ù
+	// æ·»åŠ æ ‡é¢˜æ ·å¼ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘çš„å¤§çº²
 	listWiki = [];
 	for (var k = 1; k <= 6; k++){
 		var objH16 = objHtmlDocument.getElementsByTagName("H"+k);
 		for (var i = 0; i < objH16.length; i++) {
 			var elem = objH16[i];
 			var text = elem.innerText;
-			if  (text != null && text != "") { listH16.push(elem); }
+			var iClass = parseInt(elem.KMContentClass);
+<<<<<<< HEAD
+			var isHide = elem.KMContentHide;
+			if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
+=======
+<<<<<<< HEAD
+			if  (!iClass && text != null && text != "") { 
+=======
+			var isHide = elem.KMContentHide;
+			if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
+>>>>>>> master
+>>>>>>> devmaster
+				listH16.push(elem);
+			}
 		}
 	}
 	listH16.sort(getCompare);
 }
 //
 function GetWiki(){
-	// Ìí¼Ó google code wiki ´ó¸Ù
+	// æ·»åŠ  google code wiki å¤§çº²
 	listH16 = [];
 	var objWiki = objHtmlDocument.getElementsByTagName("DIV");
 	for (var i = 0; i < objWiki.length; i++) {
 		var elem = objWiki[i];
 		var text = elem.innerText;
-		if  (text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { listWiki.push(elem); }
+		var iClass = parseInt(elem.KMContentClass);
+<<<<<<< HEAD
+		var isHide = elem.KMContentHide;
+		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
+=======
+<<<<<<< HEAD
+		if  (!iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
+=======
+		var isHide = elem.KMContentHide;
+		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "" && text.search(/^=[^<>]+=$/) > -1) { 
+>>>>>>> master
+>>>>>>> devmaster
+			listWiki.push(elem); 
+		}
 	}
 }
 //
 function GetBold(){
-	// Ìí¼Ó¼Ó´ÖÑùÊ½¡¾<strong>,<b>¡¿µÄ´ó¸Ù
+	// æ·»åŠ åŠ ç²—æ ·å¼ã€<strong>,<b>ã€‘çš„å¤§çº²
 	listBold = [];
 	var objBold = objHtmlDocument.getElementsByTagName("B");
 	for (var i = 0; i < objBold.length; i++) {
 		var elem = objBold[i];
 		var text = elem.innerText;
-		if  (text != null && text != "") { listBold.push(elem); }
+		var iClass = parseInt(elem.KMContentClass);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		if  (!iClass && text != null && text != "") { listBold.push(elem); }
+=======
+>>>>>>> devmaster
+		var isHide = elem.KMContentHide;
+		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
+			listBold.push(elem); 
+		}
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> devmaster
 	}
 	var objStrongs = objHtmlDocument.getElementsByTagName("STRONG");
 	for (var i = 0; i < objStrongs.length; i++) {
 		var elem = objStrongs[i];
 		var text = elem.innerText;
-		if  (text != null && text != "") { listBold.push(elem); }
+		var iClass = parseInt(elem.KMContentClass);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		if  (!iClass && text != null && text != "") { listBold.push(elem); }
+=======
+>>>>>>> devmaster
+		var isHide = elem.KMContentHide;
+		if  ((!isHide || isHide != "1") && !iClass && text != null && text != "") { 
+			listBold.push(elem); 
+		}
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> devmaster
 	}
 }
 ////
 ////==========================================================================================================================
-////Ìí¼ÓÄ¿Â¼ĞÎÊ½¡¾id="WizKMContent_XXX"¡¿µÄ´ó¸Ù
+////æ·»åŠ ç›®å½•å½¢å¼ã€id="WizKMContent_XXX"ã€‘çš„å¤§çº²
 function PrintContent() {
 	if (listContent.length > 0) {
 		var htmlContent = "";
@@ -137,17 +336,15 @@ function PrintContent() {
 		htmlContent = htmlContent.replace(/KMContent_Begin/g,"<UL style=\"MARGIN: 0px 0px 0px 30px\">");
 		htmlContent = htmlContent.replace(/KMContent_End/g,"</UL>");
 		//
-		htmlContent = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Wizhelper Ä¿Â¼ :</div><UL style=\"margin:0px 0px 0px 30px\">" + htmlContent + "</UL>";
+		htmlContent = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Wizhelper contents :</div><UL style=\"margin:0px 0px 0px 30px\">" + htmlContent + "</UL>";
 		document.getElementById("divKMContent").innerHTML = htmlContent;
 		document.getElementById("divKMContent").style.display = "";
 		CheckIfContentExist();
 	}
-	else {
-		document.getElementById("divKMContent").style.display = "none";
-	}
+	else { document.getElementById("divKMContent").style.display = "none"; }
 }
 //
-//Ìí¼ÓÊéÇ©ĞÎÊ½¡¾<a name="bookmarkname">¡¿µÄ´ó¸Ù
+//æ·»åŠ ä¹¦ç­¾å½¢å¼ã€<a name="bookmarkname">ã€‘çš„å¤§çº²
 function PrintBookmark() {
 	if (listBookmark.length > 0) {
 		var htmlBookmark = "";
@@ -157,18 +354,16 @@ function PrintBookmark() {
 			htmlBookmark += getHtmlString(1, i, elem.offsetTop, elem.innerText);
 		}
 		if (htmlBookmark.length>0){
-			htmlBookmark = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Bookmark ÊéÇ© :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlBookmark + "</ul>";
+			htmlBookmark = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Bookmarks :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlBookmark + "</ul>";
 			document.getElementById("divKMBookmark").innerHTML = htmlBookmark;
 			document.getElementById("divKMBookmark").style.display = "";
 			CheckIfBookmarkExist();
 		}
-		else {
-			document.getElementById("divKMBookmark").style.display = "none";
-		}
 	}
+	else { document.getElementById("divKMBookmark").style.display = "none"; }
 }
 //
-//Ìí¼Ó google code wiki ´ó¸Ù
+//æ·»åŠ  google code wiki å¤§çº²
 function PrintWiki() {
 	if (listWiki.length > 0) {
 		var htmlWiki = "";
@@ -178,17 +373,15 @@ function PrintWiki() {
 			htmlWiki += getHtmlString(2, i, elem.offsetTop, elem.innerText);
 		}
 		if (htmlWiki.length>0) {
-			htmlWiki = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Wiki ´ó¸Ù :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlWiki + "</ul>";
+			htmlWiki = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Wiki outline :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlWiki + "</ul>";
 			document.getElementById("divKMWiki").innerHTML = htmlWiki;
 			document.getElementById("divKMWiki").style.display = "";
 		}
-		else {
-			document.getElementById("divKMWiki").style.display = "none";
-		}
 	}
+	else { document.getElementById("divKMWiki").style.display = "none"; }
 }
 //
-//Ìí¼Ó±êÌâÑùÊ½¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿µÄ´ó¸Ù
+//æ·»åŠ æ ‡é¢˜æ ·å¼ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘çš„å¤§çº²
 function PrintH16() {
 	if (listH16.length > 0) {
 		var htmlH16 = "";
@@ -206,18 +399,16 @@ function PrintH16() {
 			}
 			htmlH16 = htmlH16.replace(/KMContent_Begin/g,"<UL style=\"MARGIN: 0px 0px 0px 30px\">");
 			htmlH16 = htmlH16.replace(/KMContent_End/g,"</UL>");
-			htmlH16 = "<div style=\"font-weight:bold; border-bottom-style:groove;\">H1~H6 ´ó¸Ù :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlH16 + "</ul>";
+			htmlH16 = "<div style=\"font-weight:bold; border-bottom-style:groove;\">H1~H6 outline :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlH16 + "</ul>";
 			document.getElementById("divKMH16").innerHTML = htmlH16;
 			document.getElementById("divKMH16").style.display = "";
 			CheckIfOutlineExist();
 		}
-		else {
-			document.getElementById("divKMH16").style.display = "none";
-		}
 	}
+	else { document.getElementById("divKMH16").style.display = "none"; }
 }
 //
-//Ìí¼Ó¼Ó´ÖÑùÊ½¡¾<strong>,<b>¡¿µÄ´ó¸Ù
+//æ·»åŠ åŠ ç²—æ ·å¼ã€<strong>,<b>ã€‘çš„å¤§çº²
 function PrintBold() {
 	if (listBold.length > 0) {
 		var htmlBold = "";
@@ -227,21 +418,19 @@ function PrintBold() {
 			htmlBold += getHtmlString(4, i, elem.offsetTop, elem.innerText);
 		}
 		if (htmlBold.length>0) {
-			htmlBold = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Bold ´ó¸Ù :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlBold + "</ul>";
+			htmlBold = "<div style=\"font-weight:bold; border-bottom-style:groove;\">Bold outline :</div><ul style=\"margin:0px 0px 0px 20px\">" + htmlBold + "</ul>";
 			document.getElementById("divKMBold").innerHTML = htmlBold;
 			document.getElementById("divKMBold").style.display = "";
 		}
-		else {
-			document.getElementById("divKMBold").style.display = "none";
-		}
 	}
+	else { document.getElementById("divKMBold").style.display = "none"; }
 }
 ////
 ////==========================================================================================================================
 ////
 function GetAndPrintContent() {
 	if (objCheckboxContent.checked) {
-		GetAs();
+		GetContent();
 		PrintContent();
 	}
 	else { document.getElementById("divKMContent").style.display = "none"; }
@@ -249,7 +438,7 @@ function GetAndPrintContent() {
 //
 function GetAndPrintBookmark() {
 	if (objCheckboxBookmark.checked) {
-		GetAs();
+		GetBookmark();
 		PrintBookmark();
 	}
 	else { document.getElementById("divKMBookmark").style.display = "none"; }
@@ -280,7 +469,7 @@ function GetAndPrintBold() {
 }
 ////
 ////==========================================================================================================================
-//// Éú³É´ó¸ÙÌõÄ¿
+//// ç”Ÿæˆå¤§çº²æ¡ç›®
 function getHtmlString(itype,i,pos,text) {
 	var str = "";
 	str += "<li><a href=\"javascript:void(0);\" onclick=\"gotoElem('" + pos + "');\">"  + text + "</a>";
@@ -294,7 +483,7 @@ function getHtmlString(itype,i,pos,text) {
 }
 ////
 ////==========================================================================================================================
-//// Éú³ÉËæ»úÊı×Ö
+//// ç”Ÿæˆéšæœºæ•°å­—
 function getRandomInt() {
 	var objDate = new Date();
 	var strRnd1 = objDate.getTime();
@@ -330,7 +519,7 @@ function getCheckStatus(str,iType) {
 }
 ////
 ////==========================================================================================================================
-////Ìø×ªµ½Ò³ÃæÔªËØÎ»ÖÃ
+////è·³è½¬åˆ°é¡µé¢å…ƒç´ ä½ç½®
 function gotoElem(pos) {
 	objHtmlDocument.parentWindow.scrollTo(objHtmlDocument.body.offsetLeft, pos);
 }
@@ -338,9 +527,9 @@ function gotoElem(pos) {
 ////==========================================================================================================================
 ////
 //
-//´ó¸ÙÏî×ªÎªÄ¿Â¼Ïî
+//å¤§çº²é¡¹è½¬ä¸ºç›®å½•é¡¹
 function OutlineToContent(itype,i,iClass) {
-	// ÊéÇ©ĞÎÊ½¡¾<a name="bookmarkname">¡¿µÄ´ó¸Ù
+	// ä¹¦ç­¾å½¢å¼ã€<a name="bookmarkname">ã€‘çš„å¤§çº²
 	if (itype == 1) { 
 		elem = listBookmark[i];
 		listBookmark.splice(i,1);
@@ -348,26 +537,28 @@ function OutlineToContent(itype,i,iClass) {
 		InsertBookmarkToDoc(1);
 		CheckIfBookmarkExist();
 	}
-	// google code wiki ´ó¸Ù
+	// google code wiki å¤§çº²
 	else if (itype == 2) { 
 		elem = listWiki[i]; 
 		listWiki.splice(i,1);
 		PrintWiki();
 	}
-	// ±êÌâÑùÊ½¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿µÄ´ó¸Ù
+	// æ ‡é¢˜æ ·å¼ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘çš„å¤§çº²
 	else if (itype == 3) { 
 		elem = listH16[i]; 
 		listH16.splice(i,1); 
+
 		PrintH16();
 		CheckIfOutlineExist();
 		InsertOutlineToDoc(1);
 	}
-	// ¼Ó´ÖÑùÊ½¡¾<strong>,<b>¡¿µÄ´ó¸Ù
+	// åŠ ç²—æ ·å¼ã€<strong>,<b>ã€‘çš„å¤§çº²
 	else if (itype == 4) { 
 		elem = listBold[i]; 
 		listBold.splice(i,1); 
 		PrintBold();
 	}
+	//
 	elem.KMContentClass = iClass;
 	if (!elem.id ) { 
 		elem.id = "WizKMContent_" + getRandomInt();
@@ -377,12 +568,12 @@ function OutlineToContent(itype,i,iClass) {
 	if (objCheckboxContent.checked) { PrintContent(); }
 	InsertContentToDoc(1);
 }
-//Ä¿Â¼Ïî×ªÎª´ó¸ÙÏî
+//ç›®å½•é¡¹è½¬ä¸ºå¤§çº²é¡¹
 function ContentToOutline(i) {
 	var elem = listContent[i];
 	elem.KMContentClass = "";
 	listContent.splice(i,1);
-	// ÊéÇ©ĞÎÊ½¡¾<a name="bookmarkname">¡¿µÄ´ó¸Ù
+	// ä¹¦ç­¾å½¢å¼ã€<a name="bookmarkname">ã€‘çš„å¤§çº²
 	if (elem.tagName=="A" && elem.name!=null && elem.name!="") { 
 		listBookmark.push(elem);
 		listBookmark.sort(getCompare);
@@ -390,13 +581,13 @@ function ContentToOutline(i) {
 		InsertBookmarkToDoc(1);
 		CheckIfBookmarkExist();
 	}
-	// google code wiki ´ó¸Ù
+	// google code wiki å¤§çº²
 	else if (elem.tagName == "DIV" && elem.innerText.search(/^=[^<>]+=$/) > -1) { 
 		listWiki.push(elem); 
 		listWiki.sort(getCompare);
 		if (objCheckboxWiki.checked) { PrintWiki(); }
 	}
-	// ±êÌâÑùÊ½¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿µÄ´ó¸Ù
+	// æ ‡é¢˜æ ·å¼ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘çš„å¤§çº²
 	else if ("H1H2H3H4H5H6".indexOf(elem.tagName) != -1)  { 
 		listH16.push(elem);
 		listH16.sort(getCompare);
@@ -404,20 +595,20 @@ function ContentToOutline(i) {
 		InsertOutlineToDoc(1);
 		CheckIfOutlineExist();
 	}
-
-	// ¼Ó´ÖÑùÊ½¡¾<strong>,<b>¡¿µÄ´ó¸Ù
+	// åŠ ç²—æ ·å¼ã€<strong>,<b>ã€‘çš„å¤§çº²
 	else if (elem.tagName == "STRONG" || elem.tagName == "B") { 
 		listBold.push(elem); 
 		listBold.sort(getCompare);
 		if (objCheckboxBold.checked) { PrintBold(); }
 	}
+	//
 	PrintContent();
 	InsertContentToDoc(1);
 	CheckIfContentExist();
 	objHtmlDocument.body.setAttribute("wizKMDocumentModified", "1", 0);
 }
 //
-//¸Ä±äÄ¿Â¼Ïî¼¶±ğ
+//æ”¹å˜ç›®å½•é¡¹çº§åˆ«
 function ClassContent(i,dClass) {
 	var elem = listContent[i];
 	if (elem) {
@@ -433,7 +624,7 @@ function ClassContent(i,dClass) {
 	objHtmlDocument.body.setAttribute("wizKMDocumentModified", "1", 0);
 }
 //
-//È¡ÏûÄ¿Â¼Ïî
+//å–æ¶ˆç›®å½•é¡¹
 function UnContent(i) {
 	var elem = listContent[i];
 	listContent.splice(i,1);
@@ -452,20 +643,20 @@ function UnContent(i) {
 //
 //
 function UnOutline(itype,i) {
-	// ÊéÇ©ĞÎÊ½¡¾<a name="bookmarkname">¡¿µÄ´ó¸Ù
+	// ä¹¦ç­¾å½¢å¼ã€<a name="bookmarkname">ã€‘çš„å¤§çº²
 	if (itype == 1) { 
 		elem = listBookmark[i];
 		listBookmark.splice(i,1);
 		PrintBookmark();
 		InsertBookmarkToDoc(1);
 	}
-	// google code wiki ´ó¸Ù
+	// google code wiki å¤§çº²
 	else if (itype == 2) { 
 		elem = listWiki[i];
 		listWiki.splice(i,1);
 		PrintWiki();
 	}
-	// ±êÌâÑùÊ½¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿µÄ´ó¸Ù
+	// æ ‡é¢˜æ ·å¼ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘çš„å¤§çº²
 	else if (itype == 3) { 
 		elem = listH16[i]; 
 		listH16.splice(i,1);
@@ -473,12 +664,14 @@ function UnOutline(itype,i) {
 		InsertOutlineToDoc(1);
 		CheckIfOutlineExist();
 	}
-	// ¼Ó´ÖÑùÊ½¡¾<strong>,<b>¡¿µÄ´ó¸Ù
+	// åŠ ç²—æ ·å¼ã€<strong>,<b>ã€‘çš„å¤§çº²
 	else if (itype == 4) { 
 		elem = listBold[i]; 
 		listBold.splice(i,1); 
 		PrintBold();
 	}
+	//
+	elem.KMContentHide = "1";
 	objHtmlDocument.body.setAttribute("wizKMDocumentModified", "1", 0);
 }
 ////
@@ -527,7 +720,7 @@ function onclickBold() {
 }
 ////
 ////==========================================================================================================================
-////Ìí¼ÓÎÄµµ¶¥²¿ÊéÇ©
+////æ·»åŠ æ–‡æ¡£é¡¶éƒ¨ä¹¦ç­¾
 function AddPageTopAnchor() {
 	var objAPageTop = objHtmlDocument.getElementById("KMContentPageTopID");
 	if (objAPageTop) {
@@ -536,7 +729,7 @@ function AddPageTopAnchor() {
 			objAPageTop = objHtmlDocument.createElement("a");
 			objAPageTop.id="KMContentPageTopID";
 			objAPageTop.name = "KMContentPageTopID";
-			//					objAPageTop.innerText = "·µ»ØÎÄµµ¶¥²¿";
+			//					objAPageTop.innerText = "è¿”å›æ–‡æ¡£é¡¶éƒ¨";
 			//					objAPageTop.style.display = "none";
 			objHtmlDocument.body.insertBefore(objAPageTop,objHtmlDocument.body.firstChild);
 		}
@@ -545,7 +738,7 @@ function AddPageTopAnchor() {
 		objAPageTop = objHtmlDocument.createElement("a");
 		objAPageTop.id="KMContentPageTopID";
 		objAPageTop.name = "KMContentPageTopID";
-		//				objAPageTop.innerText = "·µ»ØÎÄµµ¶¥²¿";
+		//				objAPageTop.innerText = "è¿”å›æ–‡æ¡£é¡¶éƒ¨";
 		//				objAPageTop.style.display = "none";
 		objHtmlDocument.body.insertBefore(objAPageTop,objHtmlDocument.body.firstChild);
 	}
@@ -553,7 +746,7 @@ function AddPageTopAnchor() {
 ////
 ////==========================================================================================================================
 ////
-//²åÈëÄ¿Â¼µ½ÎÄµµ¶¥²¿
+//æ’å…¥ç›®å½•åˆ°æ–‡æ¡£é¡¶éƒ¨
 function InsertContentToDoc(isUpdate) {
 	if (listContent.length > 0) {
 		var htmlContentLink = "";
@@ -589,7 +782,7 @@ function InsertContentToDoc(isUpdate) {
 	CheckIfContentExist();
 }
 //
-//É¾³ıÎÄµµ¶¥²¿µÄÄ¿Â¼ÁĞ±í
+//åˆ é™¤æ–‡æ¡£é¡¶éƒ¨çš„ç›®å½•åˆ—è¡¨
 function DeleteContentToDoc() {
 	var objdivContent = objHtmlDocument.getElementById("divKMContent");
 	if (objdivContent) {
@@ -599,7 +792,7 @@ function DeleteContentToDoc() {
 	CheckIfContentExist();
 }
 //
-//¼ì²éÊÇ·ñÓĞÎÄµµ¶¥²¿Ä¿Â¼
+//æ£€æŸ¥æ˜¯å¦æœ‰æ–‡æ¡£é¡¶éƒ¨ç›®å½•
 function CheckIfContentExist() {
 	var objdivContent = objHtmlDocument.getElementById("divKMContent");
 	if (!objdivContent) {
@@ -616,7 +809,7 @@ function CheckIfContentExist() {
 }
 ////
 ////==========================================================================================================================
-////²åÈëÊéÇ©µ½ÎÄµµ¶¥²¿
+////æ’å…¥ä¹¦ç­¾åˆ°æ–‡æ¡£é¡¶éƒ¨
 function InsertBookmarkToDoc(isUpdate) {
 	if (listBookmark.length > 0) {
 		var htmlBookmarkLink = "";
@@ -653,7 +846,7 @@ function InsertBookmarkToDoc(isUpdate) {
 	CheckIfBookmarkExist();
 }
 //
-//É¾³ıÎÄµµ¶¥²¿µÄÊéÇ©ÁĞ±í
+//åˆ é™¤æ–‡æ¡£é¡¶éƒ¨çš„ä¹¦ç­¾åˆ—è¡¨
 function DeleteBookmarkToDoc() {
 	var objdivBookmark = objHtmlDocument.getElementById("divKMBookmark");
 	if (objdivBookmark) {
@@ -663,7 +856,7 @@ function DeleteBookmarkToDoc() {
 	CheckIfBookmarkExist();
 }
 //
-//¼ì²éÊÇ·ñÓĞÎÄµµ¶¥²¿ÊéÇ©ÁĞ±í
+//æ£€æŸ¥æ˜¯å¦æœ‰æ–‡æ¡£é¡¶éƒ¨ä¹¦ç­¾åˆ—è¡¨
 function CheckIfBookmarkExist() {
 	var objdivBookmark = objHtmlDocument.getElementById("divKMBookmark");
 	if (!objdivBookmark) {
@@ -677,7 +870,7 @@ function CheckIfBookmarkExist() {
 }
 ////
 ////==========================================================================================================================
-////²åÈë¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿´ó¸Ùµ½ÎÄµµ¶¥²¿
+////æ’å…¥ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘å¤§çº²åˆ°æ–‡æ¡£é¡¶éƒ¨
 function InsertOutlineToDoc(isUpdate) {
 	if (listH16.length > 0) {
 		var htmlH16Link = "";
@@ -722,7 +915,7 @@ function InsertOutlineToDoc(isUpdate) {
 	}
 }
 //
-//É¾³ı¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿´ó¸Ù
+//åˆ é™¤ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘å¤§çº²
 function DeleteOutlineToDoc() {
 	var objdivOutline = objHtmlDocument.getElementById("divKMOutline");
 	if (objdivOutline) {
@@ -732,7 +925,7 @@ function DeleteOutlineToDoc() {
 	CheckIfOutlineExist();
 }
 //
-//¼ì²é¡¾<h1>,<h2>,<h3>,<h4>,<h5>,<h6>¡¿´ó¸Ù
+//æ£€æŸ¥ã€<h1>,<h2>,<h3>,<h4>,<h5>,<h6>ã€‘å¤§çº²
 function CheckIfOutlineExist() {
 	var objdivOutline = objHtmlDocument.getElementById("divKMOutline");
 	if (!objdivOutline) {
