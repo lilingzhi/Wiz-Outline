@@ -1,3 +1,5 @@
+// update to 3.0.6 2012.3.15
+//
 var strCheckStatusDefault = "111111"
 //
 var WizExplorerApp = window.external;
@@ -652,6 +654,12 @@ function InsertContentToDoc(isUpdate) {
 		AddPageTopAnchor();
 		objHtmlDocument.body.setAttribute("wizKMDocumentModified", "1", 0);
 	}
+	else{
+		var objdivContent = objHtmlDocument.getElementById("divKMContent");
+		if (objdivContent) {
+			objdivContent.removeNode(true);
+		}
+	}
 	CheckIfContentExist();
 }
 //
@@ -677,7 +685,6 @@ function CheckIfContentExist() {
 		document.getElementById("btnInsertContentToDoc").style.display = "none";
 		document.getElementById("btnDeleteContentToDoc").style.display = "";
 		return false;
-		re
 	}
 }
 ////
@@ -715,6 +722,12 @@ function InsertBookmarkToDoc(isUpdate) {
 		objdivBookmark.innerHTML = htmlBookmarkLink;
 		AddPageTopAnchor();
 		objHtmlDocument.body.setAttribute("wizKMDocumentModified", "1", 0);
+	}
+	else{
+		var objdivBookmark = objHtmlDocument.getElementById("divKMBookmark");
+		if (objdivBookmark) {
+			objdivBookmark.removeNode(true);
+		}
 	}
 	CheckIfBookmarkExist();
 }
@@ -785,6 +798,12 @@ function InsertOutlineToDoc(isUpdate) {
 			objHtmlDocument.body.setAttribute("wizKMDocumentModified", "1", 0);
 		}
 		CheckIfOutlineExist();
+	}
+	else{
+		var objdivOutline = objHtmlDocument.getElementById("divKMOutline");
+		if (objdivOutline) {
+			objdivOutline.removeNode(true);
+		}
 	}
 }
 //
